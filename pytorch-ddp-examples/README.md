@@ -18,12 +18,6 @@ conda create -n multi-node-gpu python=3.8
 conda activate multi-node-gpu
 ```
 
-### Add conda environment as a Jupyter kernel (optional)
-```
-conda install ipykernel
-python -m ipykernel install --user --name multi-node-gpu --display-name "multi-node-gpu"
-```
-
 ### Install packages
 ```
 pip3 install -r requirements.txt
