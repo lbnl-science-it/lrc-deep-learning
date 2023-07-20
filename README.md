@@ -10,5 +10,5 @@ lawrencium hpc cluster for deep learning
 ## [Run `Autoencoder` on Lawrencium](./MDMachineLearning-demo)
 * Ref: https://doi.org/10.1002/prot.26068
 
-## [Run pytorch Distributed Data Parallel(DDP) on Lawrencium Cluster](pytorch-ddp-examples)
+## [Run pytorch `Distributed Data Parallel(DDP)` on Lawrencium Cluster](pytorch-ddp-examples)
 * Ref: https://pytorch.org/tutorials/beginner/ddp_series_intro.html
