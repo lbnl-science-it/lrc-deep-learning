@@ -12,6 +12,11 @@ Code for the DDP tutorial series at https://pytorch.org/tutorials/beginner/ddp_s
 ### Request an [Interactive Jupyter Server](https://it.lbl.gov/resource/hpc/for-users/hpc-documentation/open-ondemand/jupyter-server/) on ES1 GPU partition from [Lawrencium Open OnDemand](https://lrc-ondemand.lbl.gov)
 * Connect to Jupyter and open a terminal
 
+### Download this git repo
+```
+git clone https://github.com/lbnl-science-it/lrc-deep-learning.git
+cd lrc-deep-learning/pytorch-ddp-examples/
+```
 ### Create conda environment
 ```
 conda create -n multi-node-gpu python=3.8
