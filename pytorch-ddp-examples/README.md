@@ -31,6 +31,8 @@ Replace `ac_XYZ` with __your Lawrencium slurm account__.
 ```
 # ac_XYZ needs to be replaced with your Lawrencium slurm account
 export SBATCH_ACCOUNT=ac_XYZ
+```
+```
 # submit the slurm job
 sh ./run_gpuA40_node.sh
 ```
