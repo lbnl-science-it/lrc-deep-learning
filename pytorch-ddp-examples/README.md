@@ -5,23 +5,22 @@ Code for the DDP tutorial series at https://pytorch.org/tutorials/beginner/ddp_s
 
 ## Files
 * [multi_node_gpu.py](multi_node_gpu.py): DDP on multiple nodes and multiple GPUs using Torchrun
-* [lrc_slurm_run.sbatch](lrc_slurm_run.sbatch): Lawrencium cluster slurm script to launch a training job on 2 nodes, each node has 4 of GPUs(NVidia A40)
+* [lrc_slurm_run.sbatch](lrc_slurm_run.sbatch): Lawrencium cluster slurm script to launch a training job on 2 nodes, each node has 4 of NVIDIA A40 GPUs
 * [run_gpuA40_node.sh](run_gpuA40_node.sh): Set up slurm environment variables, and submit slurm job
 
 ## Run DDP on multiple nodes & GPUs on [Lawrencium Cluster](https://it.lbl.gov/service/scienceit/high-performance-computing/)
 ### Request an [Interactive Jupyter Server](https://it.lbl.gov/resource/hpc/for-users/hpc-documentation/open-ondemand/jupyter-server/) on ES1 GPU partition from [Lawrencium Open OnDemand](https://lrc-ondemand.lbl.gov)
 * Connect to Jupyter and open a terminal
 
+### Download this git repo
+```
+git clone https://github.com/lbnl-science-it/lrc-deep-learning.git
+cd lrc-deep-learning/pytorch-ddp-examples/
+```
 ### Create conda environment
 ```
 conda create -n multi-node-gpu python=3.8
 conda activate multi-node-gpu
-```
-
-### Add conda environment as a Jupyter kernel (optional)
-```
-conda install ipykernel
-python -m ipykernel install --user --name multi-node-gpu --display-name "multi-node-gpu"
 ```
 
 ### Install packages
@@ -37,6 +36,8 @@ Replace `ac_XYZ` with __your Lawrencium slurm account__.
 ```
 # ac_XYZ needs to be replaced with your Lawrencium slurm account
 export SBATCH_ACCOUNT=ac_XYZ
+```
+```
 # submit the slurm job
 sh ./run_gpuA40_node.sh
 ```
