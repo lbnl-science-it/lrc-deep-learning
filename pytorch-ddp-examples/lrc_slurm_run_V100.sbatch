@@ -10,7 +10,7 @@
 # Node:
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=64
+#SBATCH --cpus-per-task=8
 #
 # Account:
 #SBATCH --account=$SBATCH_ACCOUNT
