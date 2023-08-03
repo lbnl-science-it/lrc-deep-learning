@@ -47,7 +47,7 @@ echo Node List: $nodes
 export LOGLEVEL=INFO
 
 cwd=$(pwd)
-echo "srun torchrun --nnodes 2 --nproc_per_node 4 --rdzv_id $RANDOM --rdzv_backend c10d --rdzv_endpoint $head_node:29500 $cwd/multinode.py 50 10"
+echo "srun torchrun --nnodes 2 --nproc_per_node 2 --rdzv_id $RANDOM --rdzv_backend c10d --rdzv_endpoint $head_node:29500 $cwd/multinode.py 50 10"
 
 srun torchrun --nnodes 2 --nproc_per_node 2 --rdzv_id $RANDOM --rdzv_backend c10d --rdzv_endpoint $head_node:29500 $cwd/multi_node_gpu.py 50 10
 
