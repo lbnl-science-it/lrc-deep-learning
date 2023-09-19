@@ -34,3 +34,17 @@ Ordering of CTRL code to protein family
 5: stop token
 129406: pad token
 ```
+
+## Fine-tuned with jgi bgc data using multiple GPUs on Lawrencium Cluster
+*  This fine-tune [example](log/gpu_A40_7node_28gpus.log) ran 2048 epochs on [jgi bgc data](../miBIG/S3_pickle/data-1.pickle) and took approximately 36 hours on 28 GPUs (Nvida A40) on [Lawrencium Cluster](https://it.lbl.gov/service/scienceit/high-performance-computing/)
+
+* Run the fine-tune using pytorch Distributed Data Parallel([DDP](https://pytorch.org/tutorials/beginner/ddp_series_theory.html)) on 32 Nvida A40 GPUs.
+  * Replace `ac_XYZ` with __your Lawrencium slurm account__.
+```
+# ac_XYZ needs to be replaced with your Lawrencium slurm account
+export SBATCH_ACCOUNT=ac_XYZ
+```
+```
+# submit the slurm job
+sh ./run_gpuA40_node.sh
+```
