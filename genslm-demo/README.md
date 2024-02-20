@@ -23,7 +23,7 @@ pip install git+https://github.com/ramanathanlab/genslm
 ## Usage
 
 ### __Download pre-trained models__
-The pre-trained models and datasets need to be downloaded from this [Globus Endpoint](https://app.globus.org/file-manager?origin_id=25918ad0-2a4e-4f37-bcfc-8183b19c3150&origin_path=%2F) to Lawrencium cluser scratch space, e.g.: `/global/scratch/users/$USER/genslm-data/`
+__The pre-trained models and datasets need to be downloaded from this [Globus Endpoint](https://app.globus.org/file-manager?origin_id=25918ad0-2a4e-4f37-bcfc-8183b19c3150&origin_path=%2F)__ to Lawrencium cluser scratch space, e.g.: `/global/scratch/users/$USER/genslm-data/`
 
 ![](globus-to-lrc.png)
 
