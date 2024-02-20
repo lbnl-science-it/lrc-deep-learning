@@ -23,13 +23,14 @@ pip install git+https://github.com/ramanathanlab/genslm
 ## Usage
 
 ### __Download pre-trained models__
-The pre-trained models and datasets need be downloaded from this [Globus Endpoint](https://app.globus.org/file-manager?origin_id=25918ad0-2a4e-4f37-bcfc-8183b19c3150&origin_path=%2F) to Lawrencium cluser scratch space e.g.: `/global/scratch/users/$USER/genslm-data/`
+The pre-trained models and datasets need be downloaded from this [Globus Endpoint](https://app.globus.org/file-manager?origin_id=25918ad0-2a4e-4f37-bcfc-8183b19c3150&origin_path=%2F) to Lawrencium cluser scratch space, e.g.: `/global/scratch/users/$USER/genslm-data/`
 
 
 ### Use GenSLMs to compute sequence embeddings for downsteam tasks 
 
 ```bash
-python genslm-embeddings.py
+$ python genslm-embeddings.py
+
 Tokenizing...: 100% 2/2 [00:00<00:00, 80.59it/s]
 (2, 512)
 ```
@@ -84,7 +85,8 @@ print(embeddings.shape)
 ### Use GenSLMs to generate synthetic sequences
 
 ```bash
-python genslm-generate.py 
+$  python genslm-generate.py 
+
 ATG CCA CAG ATT CTG CGC GTC GCC CTC GTG
 ATG CCT GCT AAA ATA TAC TTA AAC ATG AGC
 ```
