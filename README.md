@@ -12,3 +12,6 @@ lawrencium hpc cluster for deep learning
 
 ## [Run pytorch `DDP` on multiple nodes & GPUs on Lawrencium](pytorch-ddp-examples)
 * Ref: [https://pytorch.org/tutorials/beginner/ddp_series_intro.html]()
+
+## [Run `GenSLMs` on Lawrencium GPU Cluster](./genslm-demo)
+* Ref: [https://www.biorxiv.org/content/10.1101/2022.10.10.511571v2]()
