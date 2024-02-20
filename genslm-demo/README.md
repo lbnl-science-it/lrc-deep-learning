@@ -23,8 +23,9 @@ pip install git+https://github.com/ramanathanlab/genslm
 ## Usage
 
 ### __Download pre-trained models__
-The pre-trained models and datasets need be downloaded from this [Globus Endpoint](https://app.globus.org/file-manager?origin_id=25918ad0-2a4e-4f37-bcfc-8183b19c3150&origin_path=%2F) to Lawrencium cluser scratch space, e.g.: `/global/scratch/users/$USER/genslm-data/`
+The pre-trained models and datasets need to be downloaded from this [Globus Endpoint](https://app.globus.org/file-manager?origin_id=25918ad0-2a4e-4f37-bcfc-8183b19c3150&origin_path=%2F) to Lawrencium cluser scratch space, e.g.: `/global/scratch/users/$USER/genslm-data/`
 
+![](globus-to-lrc.png)
 
 ### Use GenSLMs to compute sequence embeddings for downsteam tasks 
 
@@ -46,7 +47,7 @@ import os
 USER = os.environ.get('USER')
 
 # Load model
-# Pre-trained models and datasets need be downloaded to "/global/scratch/users/$USER/genslm-data/"
+# Pre-trained models and datasets need to be downloaded to "/global/scratch/users/$USER/genslm-data/"
 model_path = "/global/scratch/users/{}/genslm-data/models/25M/".format(USER)
 model = GenSLM("genslm_25M_patric", model_cache_dir=model_path)
 
@@ -103,7 +104,7 @@ import os
 USER = os.environ.get('USER')
 
 # Load model
-# Pre-trained models and datasets need be downloaded to "/global/scratch/users/$USER/genslm-data/"
+# Pre-trained models and datasets need to be downloaded to "/global/scratch/users/$USER/genslm-data/"
 model_path = "/global/scratch/users/{}/genslm-data/models/25M/".format(USER)
 model = GenSLM("genslm_25M_patric", model_cache_dir=model_path)
 
