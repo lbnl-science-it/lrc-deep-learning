@@ -1,5 +1,5 @@
-# Run vLLM on Lawrencium Cluster
-## Run vLLM a & GPU node on [Lawrencium Cluster](https://it.lbl.gov/service/scienceit/high-performance-computing/)
+# Run [vLLM](https://github.com/vllm-project/vllm) on Lawrencium Cluster
+## Run vLLM on a GPU node on [Lawrencium Cluster](https://it.lbl.gov/service/scienceit/high-performance-computing/)
 ### Request an [Interactive Jupyter Server](https://it.lbl.gov/resource/hpc/for-users/hpc-documentation/open-ondemand/jupyter-server/) on ES1 GPU partition from [Lawrencium Open OnDemand](https://lrc-ondemand.lbl.gov)
 * Connect to Jupyter and open a terminal
 
