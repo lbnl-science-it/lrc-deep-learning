@@ -119,7 +119,7 @@ generate_sequences(model_dir, prompts=dna_sequences)
 ```
 
 ### On Lawrencium: 
-- The Lawrencium A40 GPU, with its 46 GiB of memory, can run either **`generated_sequences = generate_sequences(model_dir)`** or **`generate_sequences(model_dir, prompts=dna_sequences)`**, but attempting to run both simultaneously results in a CUDA out of memory error.
+- The Lawrencium NVidia A40 GPU, with its 46 GiB of memory, can run either **`generated_sequences = generate_sequences(model_dir)`** or **`generate_sequences(model_dir, prompts=dna_sequences)`**, but attempting to run both simultaneously results in a CUDA out of memory error.
 
 #### Output from `generate_sequences(model_dir, prompts=dna_sequences)`:
 ```
