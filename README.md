@@ -15,6 +15,3 @@ lawrencium hpc cluster for deep learning
 
 ## [Run `GenSLMs` on Lawrencium GPU Cluster](./genslm-demo)
 * Ref: [https://www.biorxiv.org/content/10.1101/2022.10.10.511571v2]()
-
-## [Run `vLLM` on Lawrencium GPU Cluster](./vLLM-demo)
-* Ref: [https://github.com/vllm-project/vllm]()
