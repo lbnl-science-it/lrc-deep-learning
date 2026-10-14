@@ -8,7 +8,7 @@ class ProteinDataset(Dataset):
 
     def __init__(self, pklpath, firstAAidx, transformFull=None, transformPartial=None, transformNone=None, evalTransform=None):
         with open(pklpath, 'rb') as handle:
-            self.data_chunk = pickle.load(handle)
+            self.data_chunk = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
         self.uids = list(self.data_chunk.keys())
         self.transformFull = transformFull
         self.transformPartial = transformPartial

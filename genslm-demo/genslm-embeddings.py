@@ -23,7 +23,7 @@ sequences = [
 ]
 
 dataset = SequenceDataset(sequences, model.seq_length, model.tokenizer)
-dataloader = DataLoader(dataset)
+dataloader = DataLoader(dataset, pin_memory=True)
 
 # Compute averaged-embeddings for each input sequence
 embeddings = []

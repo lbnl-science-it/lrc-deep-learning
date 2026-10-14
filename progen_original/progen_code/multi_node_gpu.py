@@ -65,7 +65,7 @@ class Trainer:
 
     def _load_snapshot(self, snapshot_path):
         loc = f"cuda:{self.local_rank}"
-        snapshot = torch.load(snapshot_path, map_location=loc)
+        snapshot = torch.load(snapshot_path, map_location=loc, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
         self.model.load_state_dict(snapshot["model_state_dict"])
         self.epochs_run = snapshot["epoch"]
         print(f"Resuming training from snapshot at Epoch {self.epochs_run}")
@@ -98,7 +98,7 @@ class Trainer:
                     'optimizer_state_dict': self.optimizer.state_dict(),
                     'loss': self.loss
         }
-        torch.save(snapshot, self.snapshot_path)
+        torch.save(snapshot, self.snapshot_path)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
         print(f"Epoch {epoch} | Training snapshot saved at {self.snapshot_path}")
 
     def train(self, max_epochs: int):
@@ -178,7 +178,7 @@ class TrainerCTRL(object):
                     self.writer.add_scalar('Loss_iteration',loss.item(),iter_num)
 
                     if (iter_num+1)%self.save_iter==0 or (epoch+1==num_epochs):
-                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':iter_num,
+                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':iter_num,  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
                                     'model_state_dict': self.model.state_dict(),
                                     'optimizer_state_dict': self.optimizer.state_dict(),
                                     'loss': loss,
@@ -219,7 +219,7 @@ class CTRLmodel(torch.nn.Module):
     if os.path.exists(pytorch_model_hash):
       print('Found PyTorch checkpoint @', pytorch_model_hash)
       print('Loading instead of converting from TensorFlow')
-      checkpoint = torch.load(pytorch_model_hash)
+      checkpoint = torch.load(pytorch_model_hash, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
       
       #self.tied_embedding_softmax.load_state_dict(checkpoint['softmax'])
       #self.encoder.load_state_dict(checkpoint['encoder'])

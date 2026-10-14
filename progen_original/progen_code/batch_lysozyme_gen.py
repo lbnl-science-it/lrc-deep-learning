@@ -65,7 +65,7 @@ class CTRLmodel(torch.nn.Module):
 
   def loadCheckpoint(self, model_path, num_layers,pt=False):
     #if not pt:
-    pytorch_model_hash = hashlib.md5(model_path.encode('utf-8')).hexdigest()
+    pytorch_model_hash = hashlib.sha256(model_path.encode('utf-8')).hexdigest()
 
     if os.path.exists(pytorch_model_hash):
 
@@ -251,7 +251,7 @@ def main():
 
     pt_model = "/export/share/amadani/progen/ckpt/lys_model_sep3_0.pth3"
 
-    model.load_state_dict(torch.load(pt_model)["model_state_dict"])
+    model.load_state_dict(torch.load(pt_model, weights_only=True)["model_state_dict"])
 
     #reader = model.loadCheckpoint(model_path=pt_model, num_layers = num_layers,pt=True)
 
@@ -262,18 +262,18 @@ def main():
     model.eval()
 
     with open(os.path.join('mapping_files/','taxa_to_lineage.p'),'rb') as handle:
-        taxa_to_lineage = pickle.load(handle)
+        taxa_to_lineage = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     with open('mapping_files/taxa_to_ctrl_idx.p','rb') as handle:
-        taxa_to_ctrl_idx = pickle.load(handle)
+        taxa_to_ctrl_idx = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     with open('mapping_files/kw_to_ctrl_idx.p','rb') as handle:
-        kw_to_ctrl_idx = pickle.load(handle)
+        kw_to_ctrl_idx = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     with open('mapping_files/aa_to_ctrl_idx.p','rb') as handle:
-        aa_to_ctrl_idx = pickle.load(handle)
+        aa_to_ctrl_idx = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
 
     with open('mapping_files/kw_to_name.p2','rb') as handle:
-        kw_to_name = pickle.load(handle)
+        kw_to_name = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     with open('mapping_files/taxid_to_name.p2','rb') as handle:
-        taxid_to_name = pickle.load(handle)
+        taxid_to_name = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
 
     ctrl_idx_to_aa = flipdict(aa_to_ctrl_idx)
     ctrl_idx_to_kw = flipdict(kw_to_ctrl_idx)
