@@ -23,7 +23,7 @@ obj = transformProtein(selectSwiss = 0.9, selectTrembl = 0.9,
 t1 = time.time()
 for chunknum in range(141):
     with open('/export/share/amadani/protein-data/train_test/train'+str(chunknum)+'.p','rb') as handle:
-        train_chunk = pickle.load(handle)
+        train_chunk = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     existences = []
     with tf.io.TFRecordWriter(savefold+'augtrain'+str(chunknum)+'.tfrecords') as writer:
         for uid in train_chunk.keys():

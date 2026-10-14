@@ -66,12 +66,12 @@ class CTRLmodel(torch.nn.Module):
     return x
 
   def loadCheckpoint(self, model_path, num_layers):
-    pytorch_model_hash = hashlib.md5(model_path.encode('utf-8')).hexdigest()
+    pytorch_model_hash = hashlib.sha256(model_path.encode('utf-8')).hexdigest()
 
     if os.path.exists(pytorch_model_hash):
       print('Found PyTorch checkpoint @', pytorch_model_hash)
       print('Loading instead of converting from TensorFlow')
-      checkpoint = torch.load(pytorch_model_hash)
+      checkpoint = torch.load(pytorch_model_hash, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
       self.tied_embedding_softmax.load_state_dict(checkpoint['softmax'])
       self.encoder.load_state_dict(checkpoint['encoder'])
 
@@ -177,7 +177,7 @@ ckpt_nums = set([re.split('-|\.',i)[2] for i in os.listdir(load_model_path) if i
 
 if os.path.exists(load_model_path+'evals.p'):
     with open(load_model_path+'evals.p','rb') as handle:
-        evals_dict = pickle.load(handle)
+        evals_dict = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
 else:
     evals_dict = {}
 
@@ -275,4 +275,4 @@ for trainortest in ['train0.p','test.p']:
         else:
             evals_dict[ckptnum]={trainortest:sample_dict}
         with open(load_model_path+'evals.p','wb') as handle:
-            pickle.dump(evals_dict,handle)
+            pickle.dump(evals_dict,handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle

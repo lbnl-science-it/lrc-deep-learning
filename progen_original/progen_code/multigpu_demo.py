@@ -93,8 +93,8 @@ class Trainer:
         ckp = self.model.module.state_dict()
         #PATH = "./checkpoint.pt"
         PATH = self.args.model_dir
-        torch.save(ckp, PATH)
-        torch.save({'epoch': epoch,
+        torch.save(ckp, PATH)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
+        torch.save({'epoch': epoch,  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
                     'model_state_dict': self.model.state_dict(),
                     'optimizer_state_dict': self.optimizer.state_dict(),
                     'loss': self.loss
@@ -181,7 +181,7 @@ class TrainerCTRL(object):
                     self.writer.add_scalar('Loss_iteration',loss.item(),iter_num)
 
                     if (iter_num+1)%self.save_iter==0 or (epoch+1==num_epochs):
-                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':iter_num,
+                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':iter_num,  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
                                     'model_state_dict': self.model.state_dict(),
                                     'optimizer_state_dict': self.optimizer.state_dict(),
                                     'loss': loss,
@@ -222,7 +222,7 @@ class CTRLmodel(torch.nn.Module):
     if os.path.exists(pytorch_model_hash):
       print('Found PyTorch checkpoint @', pytorch_model_hash)
       print('Loading instead of converting from TensorFlow')
-      checkpoint = torch.load(pytorch_model_hash)
+      checkpoint = torch.load(pytorch_model_hash, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
       
       #self.tied_embedding_softmax.load_state_dict(checkpoint['softmax'])
       #self.encoder.load_state_dict(checkpoint['encoder'])

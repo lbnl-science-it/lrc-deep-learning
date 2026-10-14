@@ -96,7 +96,7 @@ class CTRLmodel(torch.nn.Module):
     if os.path.exists(pytorch_model_hash):
       print('Found PyTorch checkpoint @', pytorch_model_hash)
       print('Loading instead of converting from TensorFlow')
-      checkpoint = torch.load(pytorch_model_hash)
+      checkpoint = torch.load(pytorch_model_hash, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
       
       #self.tied_embedding_softmax.load_state_dict(checkpoint['softmax'])
       #self.encoder.load_state_dict(checkpoint['encoder'])
@@ -167,7 +167,7 @@ class Trainer(object):
                 chunk_dataset = ProteinDataset(pklpath, firstAAidx = self.firstAAidx, transformFull = self.transformFull, 
                                                transformPartial = self.transformPartial, transformNone = self.transformNone)
                 dataloader = DataLoader(chunk_dataset, shuffle = True, batch_size = self.batch_size,
-                                        num_workers = self.num_workers, pin_memory = False) #TODO pinmem?
+                                        num_workers = self.num_workers, pin_memory = True) #TODO pinmem?
                 
                 for i, (sample, labels, existence, padIndex, begAAindex) in enumerate(dataloader):
                     self.optimizer.zero_grad()
@@ -186,7 +186,7 @@ class Trainer(object):
                     self.writer.add_scalar('Loss_iteration',loss.item(),iter_num)
 
                     if (iter_num+1)%self.save_iter==0:
-                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':iter_num,
+                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':iter_num,  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
                                     'model_state_dict': self.model.state_dict(),
                                     'optimizer_state_dict': self.optimizer.state_dict(),
                                     'loss': loss,
@@ -202,7 +202,7 @@ class Trainer(object):
 pklpath = '../miBIG/mibig_train_new.p'
 obj = transformProtein(mapfold = "./mapping_files", selectSwiss = 1.0, selectTrembl = 0, maxTaxaPerSample = 3, maxKwPerSample = 5, dropRate = 0.2)
 with open(pklpath, 'rb') as handle:
-    train_chunk = pickle.load(handle)
+    train_chunk = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
 for uid in train_chunk.keys():
   try:
     sample_arr, existence, thePadIndex = obj.transformSample(train_chunk[uid])

@@ -1,5 +1,6 @@
 from __future__ import print_function
 import torch
+import math
 import os
 import tqdm
 import pdb
@@ -132,7 +133,7 @@ class Encoder(torch.nn.Module):
     seq_len = x.shape[1]
     
     mask = torch.triu(torch.ones(seq_len, seq_len), 1).to('cuda')
-    x *= np.sqrt(self.d_model_size)
+    x *= math.sqrt(self.d_model_size)
     x += self.pos_encoding[:, :seq_len, :]
 
     x = self.dropout(x)

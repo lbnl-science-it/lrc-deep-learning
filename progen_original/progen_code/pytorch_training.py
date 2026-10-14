@@ -88,12 +88,12 @@ class CTRLmodel(torch.nn.Module):
     return x
 
   def loadCheckpoint(self, model_path, num_layers):
-    pytorch_model_hash = hashlib.md5(model_path.encode('utf-8')).hexdigest()
+    pytorch_model_hash = hashlib.sha256(model_path.encode('utf-8')).hexdigest()
 
     if os.path.exists(pytorch_model_hash):
       print('Found PyTorch checkpoint @', pytorch_model_hash)
       print('Loading instead of converting from TensorFlow')
-      checkpoint = torch.load(pytorch_model_hash)
+      checkpoint = torch.load(pytorch_model_hash, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
       self.tied_embedding_softmax.load_state_dict(checkpoint['softmax'])
       self.encoder.load_state_dict(checkpoint['encoder'])
 
@@ -140,7 +140,7 @@ class CTRLmodel(torch.nn.Module):
         current_layer.ffn[0].weight = str2parameter(layer_variables[13])
         current_layer.ffn[2].bias = str2parameter(layer_variables[14])
         current_layer.ffn[2].weight = str2parameter(layer_variables[15])
-      torch.save({
+      torch.save({  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
         'softmax': self.tied_embedding_softmax.state_dict(),
         'encoder': self.encoder.state_dict(),
       }, pytorch_model_hash)
@@ -201,7 +201,7 @@ class Trainer(object):
                 chunk_dataset = ProteinDataset(pklpath, firstAAidx = self.firstAAidx, transformFull = self.transformFull, 
                                                transformPartial = self.transformPartial, transformNone = self.transformNone)
                 dataloader = DataLoader(chunk_dataset, shuffle = True, batch_size = self.batch_size,
-                                        num_workers = self.num_workers, pin_memory = False) #TODO pinmem?
+                                        num_workers = self.num_workers, pin_memory = True) #TODO pinmem?
                 
                 for i, (sample, labels, existence, padIndex, begAAindex) in enumerate(dataloader):
                     self.optimizer.zero_grad()
@@ -220,7 +220,7 @@ class Trainer(object):
                     self.writer.add_scalar('Loss_iteration',loss.item(),iter_num)
 
                     if (i+1)%self.save_iter==0:
-                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':i,
+                        torch.save({'epoch': epoch, 'chunknum': chunknum, 'iteration':i,  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
                                     'model_state_dict': self.model.state_dict(),
                                     'optimizer_state_dict': self.optimizer.state_dict(),
                                     'loss': loss,

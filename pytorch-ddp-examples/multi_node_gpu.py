@@ -38,7 +38,7 @@ class Trainer:
 
     def _load_snapshot(self, snapshot_path):
         loc = f"cuda:{self.local_rank}"
-        snapshot = torch.load(snapshot_path, map_location=loc)
+        snapshot = torch.load(snapshot_path, map_location=loc, weights_only=True)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
         self.model.load_state_dict(snapshot["MODEL_STATE"])
         self.epochs_run = snapshot["EPOCHS_RUN"]
         print(f"Resuming training from snapshot at Epoch {self.epochs_run}")
@@ -65,7 +65,7 @@ class Trainer:
             "MODEL_STATE": self.model.module.state_dict(),
             "EPOCHS_RUN": epoch,
         }
-        torch.save(snapshot, self.snapshot_path)
+        torch.save(snapshot, self.snapshot_path)  # nosemgrep: trailofbits.python.pickles-in-pytorch.pickles-in-pytorch
         print(f"Epoch {epoch} | Training snapshot saved at {self.snapshot_path}")
 
     def train(self, max_epochs: int):

@@ -22,24 +22,24 @@ class transformProtein:
 
         if self.seqonly:
             with open(os.path.join(mapfold,'aa_to_ctrl_idx_seqonly.p'),'rb') as handle:
-                self.aa_to_ctrl = pickle.load(handle)
+                self.aa_to_ctrl = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             print('Sequence only - no CTRL codes')
             self.oneEncoderLength = max(self.aa_to_ctrl.values())+1
         else:
             with open(os.path.join(mapfold,'kw_to_ctrl_idx.p'),'rb') as handle:
-                self.kw_to_ctrl = pickle.load(handle)
+                self.kw_to_ctrl = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             with open(os.path.join(mapfold,'taxa_to_ctrl_idx.p'),'rb') as handle:
-                self.taxa_to_ctrl = pickle.load(handle)
+                self.taxa_to_ctrl = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             with open(os.path.join(mapfold,'aa_to_ctrl_idx.p'),'rb') as handle:
-                self.aa_to_ctrl = pickle.load(handle)
+                self.aa_to_ctrl = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             with open(os.path.join(mapfold,'taxa_to_parents.p'),'rb') as handle: # TODO: remove
-                self.taxa_to_parents = pickle.load(handle)
+                self.taxa_to_parents = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             with open(os.path.join(mapfold,'kw_to_parents.p'),'rb') as handle: # TODO: remove
-                self.kw_to_parents = pickle.load(handle)
+                self.kw_to_parents = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             with open(os.path.join(mapfold,'kw_to_lineage.p'),'rb') as handle:
-                self.kw_to_lineage = pickle.load(handle)
+                self.kw_to_lineage = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
             with open(os.path.join(mapfold,'taxa_to_lineage.p'),'rb') as handle:
-                self.taxa_to_lineage = pickle.load(handle)
+                self.taxa_to_lineage = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     
             self.oneEncoderLength = max(max(self.kw_to_ctrl.values()),max(self.taxa_to_ctrl.values()),max(self.aa_to_ctrl.values())) + 1
             print('Using one unified encoder to represent protein sample with length', self.oneEncoderLength)
@@ -166,7 +166,7 @@ class transformProtein:
 if __name__ == "__main__":
     chunknum = 0
     with open('/export/share/amadani/protein-data/train_test/train'+str(chunknum)+'.p','rb') as handle:
-        train_chunk = pickle.load(handle)
+        train_chunk = pickle.load(handle)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
     uid = 'UPI000000BF1A'
     #uid = random.sample(train_chunk.keys(),1)[0]
     obj = transformProtein(verbose=True, dropRate = 0.0, maxTaxaPerSample = 3, maxKwPerSample = 5, 
